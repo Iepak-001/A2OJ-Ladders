@@ -14,6 +14,8 @@ int main()
     }
     
     int count=0;
+    // Every bottle me check kro ki wo other 
+    // bottle se open ho pa rha ya nhi
     for(int  i=1;i<=n;i++){
         
         for(int j=1;j<=n; j++){
