@@ -10,7 +10,7 @@ int main()
     sort(arr.begin(),arr.end());
 
     int lo=0;
-    int hi=(n+1)/2;
+    int hi=(n+1)/2; //handling for odd case by adding 1
 
     int count=0;
     while(hi<n){
