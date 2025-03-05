@@ -23,11 +23,12 @@ int main()
     long long newA=a;
 
     long long minA=a,minB=b,minArea=LLONG_MAX;
+    
     for(newA=a; newA*newA<=reqArea*2;newA++){
         
-        newB=(reqArea+newA-1)/newA;
+        newB=(reqArea+newA-1)/newA; // To make cieling value
         
-        if (newB < b) continue;
+        if (newB < b) continue; // We cannot decrease any value
 
         if(newB*newA<minArea && newA*newB>=reqArea){
             minArea=newA*newB;
