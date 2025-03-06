@@ -28,6 +28,7 @@ int main()
     }
 
     int ans=f(0,n-1,heights,0);
+    
     cout<<ans;
     return 0;
 }
