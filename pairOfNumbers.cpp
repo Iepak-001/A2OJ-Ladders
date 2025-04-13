@@ -7,8 +7,7 @@ int main()
     cin >> n;
 
     vector<int> arr(n);
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
+    for (int i = 0; i < n; i++) cin >> arr[i];
 
     int logN = floor(log2(n)) + 1;
     vector<vector<int>> gcdTable(logN, vector<int>(n, 0));
