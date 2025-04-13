@@ -1,54 +1,84 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int  main()
-{
-    long long  n,m;
+typedef long long ll;
+
+ll cost(int x, const vector<int>& a, const vector<int>& b) {
+    ll total = 0;
+    for (int val : a)
+        if (val < x)
+            total += x - val;
+
+    for (int val : b)
+        if (val > x)
+            total += val - x;
+
+    return total;
+}
+
+int main(){
+    int n,m;
     cin>>n>>m;
-    vector<long long >a(n),b(m);
-    for(long long  i=0;i<n;i++) cin>>a[i];
-    for(long long  i=0;i<m;i++) cin>>b[i];
 
-    vector<long long >preA(n+1,0),preB(m+1,0);
+    vector<int>a(n),b(m);
+    for(int i=0;i<n;i++) cin>>a[i];
+    for(int j=0;j<m;j++) cin>>b[j];
 
-    for(long long  i=1;i<=n;i++) preA[i]=preA[i-1]+a[i];
-    for(long long  i=1;i<=m;i++) preB[i]=preB[i-1]+b[i];
+    sort(a.begin(),a.end());
+    sort(b.begin(),b.end());
 
-    sort(a.begin(), a.end());
-    sort(b.begin(), b.end());
+    int i=0, j=0;
 
-    // ya toh sabko max ke krabar banao
-    // ya phir max wale array ko km kro
+    vector<int>merged;
 
-    // YA ANSwer SPACE ME BINARY SEARCH
-
-    long long  lo=0;
-    long long  hi=INT_MAX;
-    long long  minSteps=INT_MAX;
-
-    while(lo<=hi){
-        long long  mid=lo+(hi-lo)/2;
-
-        long long  steps=0;
-        for(long long  i=0;i<n;i++){
-            steps+=abs(a[i]-mid);
-        }
-
-        for(long long  i=0;i<m;i++){
-            steps+=abs(b[i]-mid);
-        }
-
-        if(steps<minSteps){
-            minSteps=steps;
-            hi=mid-1;
+    while(i<n && j<m){
+        if(a[i]<=b[j]){
+            merged.push_back(a[i]);
+            i++;
         }
         else{
-            lo=mid+1;
+            merged.push_back(b[j]);
+            j++;
         }
-
     }
 
-    cout<<minSteps;
+    while(j<m) {
+        merged.push_back(b[j]);
+        j++;
+    }
 
+    while(i<n){
+        merged.push_back(a[i]);
+        i++;
+    }
+
+    // terneary search lagao
+    
+    // On Index 
+
+    int lo=0;
+    int hi=m+n-1;
+
+    while(hi-lo>3){
+        int mid1=lo+(hi-lo)/3;
+
+        int mid2= hi-(hi-lo)/3;
+
+        ll cost1=cost(merged[mid1],a,b);
+        ll cost2=cost(merged[mid2],a,b);
+
+        if (cost1 < cost2)
+            hi = mid2;
+        else
+            lo = mid1;
+    }
+
+    ll answer = LLONG_MAX;
+    for (int x = lo; x <=hi; ++x) {
+        answer = min(answer, cost(merged[x], a, b));
+    }
+
+    cout << answer << endl;
     return 0;
+
 }
