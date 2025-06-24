@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+// TRADITIONAL POSITIVE SUBARRAY SUM PROBLEM
 int main()
 {
     int t;
@@ -14,7 +15,6 @@ int main()
             if(abs(arr[i])%2!=0) isEven[i]=false;
         }
 
-        int left=0;
         int right=0;
 
         int result=-1005;
@@ -23,14 +23,10 @@ int main()
 
         while(right<n){
             currSum+=arr[right];
-            result=max(result,currSum);
-            // cout<<currSum<<" ";
-
-            
+            result=max(result,currSum);            
             
 
             if(currSum<0 || (right<n-1 && isEven[right]^isEven[right+1]==0)) {
-                left=right;
                 currSum=0;
             }
 
