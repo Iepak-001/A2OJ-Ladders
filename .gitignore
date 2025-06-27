@@ -1,2 +1,6 @@
 *
 !*.cpp
+!*.md
+
+!images/
+!images/**
