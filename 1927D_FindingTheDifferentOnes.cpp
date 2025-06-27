@@ -36,7 +36,9 @@ int main()
                 cout<<("-1 -1");
             }
             else{
+                
                 // To make starting index 1
+
                 cout<<leftPos+1<<" "<<rightPos+1;
             }
             cout<<endl;
